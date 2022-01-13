@@ -1,4 +1,3 @@
-Proceso en paralelo con temporizador
 
 ### compilar
 ```batch
