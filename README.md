@@ -1,4 +1,3 @@
-# Paralelo
 Proceso en paralelo con temporizador
 
 ### compilar
