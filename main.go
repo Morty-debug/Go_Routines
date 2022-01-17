@@ -14,10 +14,8 @@ func main() {
     }()
     //matar proceso con un tiempo limite o por retornar datos si no excede el tiempo
     select {
-        case resultado := <-retorno:
-            fmt.Println(resultado)
-        case <-time.After(3 * time.Second):
-            fmt.Println("[ERROR] tiempo expirado, proceso muerto")
+        case resultado := <-retorno: fmt.Println(resultado)
+        case <-time.After(3 * time.Second): fmt.Println("[ERROR] tiempo expirado, proceso muerto")
     }
 }
 
