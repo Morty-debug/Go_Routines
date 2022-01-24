@@ -1,9 +1,11 @@
 package main
+
 import (
     "fmt"
     "math/rand"
     "time"
 )
+
 func main() {
     //variable de retorno
     retorno := make(chan string, 1)
