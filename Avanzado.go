@@ -16,21 +16,21 @@ func work() {
 
 func routine(command <-chan string, wg *sync.WaitGroup) {
 	defer wg.Done()
-	var status = "Play"
+	var status = "Start"
 	for {
 		select {
 		case cmd := <-command:
 			fmt.Println(cmd)
 			switch cmd {
-			case "Stop":
+			case "Shutdown":
 				return
 			case "Pause":
 				status = "Pause"
 			default:
-				status = "Play"
+				status = "Start"
 			}
 		default:
-			if status == "Play" {
+			if status == "Start" {
 				work()
 			}
 		}
@@ -47,10 +47,10 @@ func main() {
 	command <- "Pause"
 
 	time.Sleep(1 * time.Second)
-	command <- "Play"
+	command <- "Start"
 
 	time.Sleep(1 * time.Second)
-	command <- "Stop"
+	command <- "Shutdown"
 
 	wg.Wait()
 }
