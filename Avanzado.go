@@ -19,20 +19,17 @@ func routine(command <-chan string, wg *sync.WaitGroup) {
 	var status = "Start"
 	for {
 		select {
-		case cmd := <-command:
-			fmt.Println(cmd)
-			switch cmd {
-			case "Shutdown":
-				return
-			case "Pause":
-				status = "Pause"
+			case cmd := <-command:
+				fmt.Println(cmd)
+				switch cmd {
+					case "Shutdown": return
+					case "Pause": status = "Pause"
+					default: status = "Start"
+				}
 			default:
-				status = "Start"
-			}
-		default:
-			if status == "Start" {
-				work()
-			}
+				if status == "Start" {
+					work()
+				}
 		}
 	}
 }
