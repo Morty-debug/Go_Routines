@@ -35,20 +35,21 @@ func routine(command <-chan string, wg *sync.WaitGroup) {
 }
 
 func main() {
+	/* Invocamos Go Routine */
 	var wg sync.WaitGroup
 	wg.Add(1)
 	command := make(chan string)
-	go routine(command, &wg)
+	go routine(command, &wg) //se ejecuta por defecto en Start
+	
+	time.Sleep(1 * time.Second) //esperar un segundo
+	command <- "Pause" //despues de un segundo pausamos la rutina
 
-	time.Sleep(1 * time.Second)
-	command <- "Pause"
+	time.Sleep(1 * time.Second) //esperar un segundo
+	command <- "Start" //despues de un segundo ejecutamos nuevamente la rutina donde se quedo
 
-	time.Sleep(1 * time.Second)
-	command <- "Start"
+	time.Sleep(1 * time.Second) //esperar un segundo
+	command <- "Shutdown" //despues de un segundo detenemos el proceso
 
-	time.Sleep(1 * time.Second)
-	command <- "Shutdown"
-
-	wg.Wait()
+	wg.Wait() //finalizamos rutina
 }
 
