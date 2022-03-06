@@ -40,13 +40,13 @@ func main() {
 	wg.Add(1)
 	command := make(chan string)
 	go routine(command, &wg) //se ejecuta por defecto en Start
-	
+	//se ejecuta la rutina mientras se espera la siguiente instruccion
 	time.Sleep(1 * time.Second) //esperar un segundo
 	command <- "Pause" //despues de un segundo pausamos la rutina
-
+	
 	time.Sleep(1 * time.Second) //esperar un segundo
 	command <- "Start" //despues de un segundo ejecutamos nuevamente la rutina donde se quedo
-
+	//se ejecuta la rutina mientras se espera la siguiente instruccion
 	time.Sleep(1 * time.Second) //esperar un segundo
 	command <- "Shutdown" //despues de un segundo detenemos el proceso
 
